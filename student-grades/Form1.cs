@@ -21,8 +21,15 @@ namespace student_grades
             InitializeComponent();
         }
 
+        //DECLARE variables
+
         //The width of a bar in the bar graph
         const int BAR_WIDTH = 25;
+        //SET the array variables
+        string[] idArray = new string[10];
+        string[] marksArray;
+        //TOTAL number of students
+        int totalNumStudents = 0;
 
         private void clearGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -56,27 +63,52 @@ namespace student_grades
 
         private void loadMarksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Set filter of dialog control
             const string FILTER = "CSV FIles|*.csv|ALL Files|*.*";
             //GET the file reader 
             StreamReader reader;
 
             string line = "", objectType = "";
-            // SET the array variables
-            string[] idArray;
-            string[] marksArray;
 
-            List<int> id = new List<int>();
-            List<int> mark = new List<int>()
+            List<int> mark = new List<int>();
 
-                //IF(user selects a file) THEN
-                    //Open input file
-                    //WHILE not end of file
-                    //Your pseudo - code goes here
-                    //ENDWHILE
-                    //Close file
-                    //Display message that file loaded
-                //ENDIF
+            //SET the filter for the dialog control
+            openFileDialog1.Filter = FILTER;
+            //IF(user selects a file) THEN
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Open input file
+                reader = File.OpenText(openFileDialog1.FileName);
+                //WHILE not end of file
+                int count = 0;
+                while(!reader.EndOfStream)
+                {
+                    try
+                    {
+                        //READ a whole csv line from the file
+                        line = reader.ReadLine();
+                        //SPLIT the values from the line using an array
+                        idArray = line.Split(',');
+                        marksArray = line.Split(',');
+
+                        //EXTRACT values into separate variable
+                        objectType = idArray[0];
+                        mark.Add(int.Parse(marksArray[1]));
+
+                        //DISPLAY the values into the listbox neatly padded out
+                        listBoxDisplay.Items.Add(objectType.PadRight(10) + mark[count].ToString().PadRight(5));
+                        count++;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Error " + line);
+                    }                    
+                }
+                reader.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error " + line);
+            }
         }
     }
 }

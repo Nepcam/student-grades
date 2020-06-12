@@ -38,6 +38,7 @@
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGraph)).BeginInit();
             this.SuspendLayout();
@@ -55,16 +56,16 @@
             // listBoxDisplay
             // 
             this.listBoxDisplay.FormattingEnabled = true;
-            this.listBoxDisplay.Location = new System.Drawing.Point(665, 26);
+            this.listBoxDisplay.Location = new System.Drawing.Point(757, 26);
             this.listBoxDisplay.Name = "listBoxDisplay";
-            this.listBoxDisplay.Size = new System.Drawing.Size(276, 550);
+            this.listBoxDisplay.Size = new System.Drawing.Size(184, 550);
             this.listBoxDisplay.TabIndex = 1;
             // 
             // pictureBoxGraph
             // 
             this.pictureBoxGraph.Location = new System.Drawing.Point(0, 27);
             this.pictureBoxGraph.Name = "pictureBoxGraph";
-            this.pictureBoxGraph.Size = new System.Drawing.Size(659, 536);
+            this.pictureBoxGraph.Size = new System.Drawing.Size(751, 549);
             this.pictureBoxGraph.TabIndex = 2;
             this.pictureBoxGraph.TabStop = false;
             // 
@@ -119,6 +120,10 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,6 +155,7 @@
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
