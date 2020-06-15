@@ -30,6 +30,9 @@ namespace student_grades
         string[] marksArray;
         //TOTAL number of students
         int totalNumStudents = 0;
+        //CALCULATE the bar height
+        int mark = 0;
+        int barHeight = 0;
 
         private void clearGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -108,6 +111,48 @@ namespace student_grades
             else
             {
                 MessageBox.Show("Error " + line);
+            }
+        }
+
+        /// <summary>
+        /// This is passed a mark and returns the height of the bar for the graph as an integer.
+        /// </summary>
+        /// <param name="mark"></param>
+        /// <param name="barHeight"></param>
+        /// <returns></returns>
+        private int CalculateBarHeight(int mark, int barHeight)
+        {
+            barHeight = pictureBoxGraph.Height * mark;
+            return barHeight;
+        }
+
+        private void graphMarksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private int CalcuLetterGrade(int mark)
+        {
+            //CHECK marks and retrun a letter grade
+            if (mark >= 80 && mark <= 100)
+            {
+                //Return a A Grade
+            }
+            else if (mark >= 65 && mark <= 79)
+            {
+                //Return a B Grade
+            }
+            else if (mark >= 50 && mark <= 64)
+            {
+                //Return a C Grade
+            }
+            else if (mark >= 35 && mark <= 49)
+            {
+                //Return a D Grade
+            }
+            else if (mark <= 34)
+            {
+                //Return a E Grade
             }
         }
     }
