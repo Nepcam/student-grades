@@ -26,13 +26,16 @@ namespace student_grades
         //The width of a bar in the bar graph
         const int BAR_WIDTH = 25;
         //SET the array variables
-        string[] idArray = new string[10];
-        string[] marksArray;
-        //TOTAL number of students
-        int totalNumStudents = 0;
+        string[] idArray = new string[TOTAL_STUDENTS];
+        string[] marksArray = new string[TOTAL_STUDENTS];
+        //TOTAL number of students (size of the idArray and marksArray)
+        const int TOTAL_STUDENTS = 100;
         //CALCULATE the bar height
         int mark = 0;
         int barHeight = 0;
+        int x = 0;
+        int y = 0;
+        int length = 0;
 
         private void clearGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -83,7 +86,7 @@ namespace student_grades
                 reader = File.OpenText(openFileDialog1.FileName);
                 //WHILE not end of file
                 int count = 0;
-                while(!reader.EndOfStream)
+                while (!reader.EndOfStream)
                 {
                     try
                     {
@@ -104,7 +107,7 @@ namespace student_grades
                     catch
                     {
                         Console.WriteLine("Error " + line);
-                    }                    
+                    }
                 }
                 reader.Close();
             }
@@ -128,32 +131,51 @@ namespace student_grades
 
         private void graphMarksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Graphics canvas = pictureBoxGraph.CreateGraphics();
+            DrawABar(canvas, x, y, length, Color.Blue);
         }
 
-        private int CalcuLetterGrade(int mark)
+        //private int CalcuLetterGrade(int mark)
+        //{
+        //    //CHECK marks and retrun a letter grade
+        //    if (mark >= 80 && mark <= 100)
+        //    {
+        //        //Return a A Grade
+        //    }
+        //    else if (mark >= 65 && mark <= 79)
+        //    {
+        //        //Return a B Grade
+        //    }
+        //    else if (mark >= 50 && mark <= 64)
+        //    {
+        //        //Return a C Grade
+        //    }
+        //    else if (mark >= 35 && mark <= 49)
+        //    {
+        //        //Return a D Grade
+        //    }
+        //    else if (mark <= 34)
+        //    {
+        //        //Return a E Grade
+        //    }
+        //}
+
+        /// <summary>
+        /// This method will write to a textfile the id, mark and letter grade of each student
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void generateReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //CHECK marks and retrun a letter grade
-            if (mark >= 80 && mark <= 100)
-            {
-                //Return a A Grade
-            }
-            else if (mark >= 65 && mark <= 79)
-            {
-                //Return a B Grade
-            }
-            else if (mark >= 50 && mark <= 64)
-            {
-                //Return a C Grade
-            }
-            else if (mark >= 35 && mark <= 49)
-            {
-                //Return a D Grade
-            }
-            else if (mark <= 34)
-            {
-                //Return a E Grade
-            }
+            //GET Writer
+            StreamWriter writer;
+            string filename = "Report.txt";
+            //CREATE text file
+            writer = File.CreateText(filename);
+            //WRITE the header line
+            writer.WriteLine("This is a test");
+            writer.Close();
+            MessageBox.Show("File \"" + filename + "\" test.");
         }
     }
 }

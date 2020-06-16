@@ -33,12 +33,13 @@
             this.loadMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listBoxDisplay = new System.Windows.Forms.ListBox();
             this.pictureBoxGraph = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGraph)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             this.loadMarksToolStripMenuItem,
             this.graphMarksToolStripMenuItem,
             this.clearGraphToolStripMenuItem,
-            this.reportToolStripMenuItem,
+            this.generateReportToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -87,11 +88,12 @@
             this.clearGraphToolStripMenuItem.Text = "Clear Graph";
             this.clearGraphToolStripMenuItem.Click += new System.EventHandler(this.clearGraphToolStripMenuItem_Click);
             // 
-            // reportToolStripMenuItem
+            // generateReportToolStripMenuItem
             // 
-            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reportToolStripMenuItem.Text = "Report";
+            this.generateReportToolStripMenuItem.Name = "generateReportToolStripMenuItem";
+            this.generateReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generateReportToolStripMenuItem.Text = "Generate Report";
+            this.generateReportToolStripMenuItem.Click += new System.EventHandler(this.generateReportToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -153,10 +155,11 @@
         private System.Windows.Forms.ToolStripMenuItem loadMarksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graphMarksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearGraphToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
