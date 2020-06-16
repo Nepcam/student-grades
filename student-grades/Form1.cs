@@ -24,15 +24,17 @@ namespace student_grades
         //DECLARE variables
 
         //The width of a bar in the bar graph
-        const int BAR_WIDTH = 25;
+        const int BAR_WIDTH = 5;
         //SET the array variables
         string[] idArray = new string[TOTAL_STUDENTS];
         string[] marksArray = new string[TOTAL_STUDENTS];
-        //TOTAL number of students (size of the idArray and marksArray)
+        //const int ID_SIZE = 100;
+        //const int MARKS_SIZE = 100;
+        //TOTAL number of students
         const int TOTAL_STUDENTS = 100;
         //CALCULATE the bar height
         int mark = 0;
-        int barHeight = 0;
+        //int barHeight = 0;
         int x = 0;
         int y = 0;
         int length = 0;
@@ -76,6 +78,7 @@ namespace student_grades
             string line = "", objectType = "";
 
             List<int> mark = new List<int>();
+            string[] lineArray;
 
             //SET the filter for the dialog control
             openFileDialog1.Filter = FILTER;
@@ -93,15 +96,15 @@ namespace student_grades
                         //READ a whole csv line from the file
                         line = reader.ReadLine();
                         //SPLIT the values from the line using an array
-                        idArray = line.Split(',');
-                        marksArray = line.Split(',');
+                        lineArray = line.Split(',');
 
-                        //EXTRACT values into separate variable
-                        objectType = idArray[0];
-                        mark.Add(int.Parse(marksArray[1]));
+                        //EXTRACT values into separate variable                                      
+                        idArray[count] = lineArray[0];
+                        marksArray[count] = lineArray[1];
+                        mark.Add(int.Parse(marksArray[count]));
 
                         //DISPLAY the values into the listbox neatly padded out
-                        listBoxDisplay.Items.Add(objectType.PadRight(10) + mark[count].ToString().PadRight(5));
+                        listBoxDisplay.Items.Add(idArray[count].PadRight(10) + marksArray[count].PadRight(5));
                         count++;
                     }
                     catch
@@ -123,42 +126,107 @@ namespace student_grades
         /// <param name="mark"></param>
         /// <param name="barHeight"></param>
         /// <returns></returns>
-        private int CalculateBarHeight(int mark, int barHeight)
+        private int CalculateBarHeight(int mark)
         {
-            barHeight = pictureBoxGraph.Height * mark;
+            int barHeight = pictureBoxGraph.Height * mark / 100;
             return barHeight;
         }
 
         private void graphMarksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics canvas = pictureBoxGraph.CreateGraphics();
-            DrawABar(canvas, x, y, length, Color.Blue);
-        }
+            //Variables
+            int barHeight = 0;
+            int x = 0;
+            int y = 0;
+            Graphics paper = pictureBoxGraph.CreateGraphics();
 
-        //private int CalcuLetterGrade(int mark)
-        //{
-        //    //CHECK marks and retrun a letter grade
-        //    if (mark >= 80 && mark <= 100)
-        //    {
-        //        //Return a A Grade
-        //    }
-        //    else if (mark >= 65 && mark <= 79)
-        //    {
-        //        //Return a B Grade
-        //    }
-        //    else if (mark >= 50 && mark <= 64)
-        //    {
-        //        //Return a C Grade
-        //    }
-        //    else if (mark >= 35 && mark <= 49)
-        //    {
-        //        //Return a D Grade
-        //    }
-        //    else if (mark <= 34)
-        //    {
-        //        //Return a E Grade
-        //    }
-        //}
+            for (int i = 0; i < idArray.Length; i++)
+            {
+                barHeight = CalculateBarHeight(int.Parse(marksArray[i]));
+                y = pictureBoxGraph.Height - barHeight;
+                DrawABar(paper, x, y, barHeight, Color.Red);
+                x += BAR_WIDTH;
+            }
+        
+
+            //const string FILTER = "CSV FIles|*.csv|ALL Files|*.*";
+            ////GET the file reader
+            //StreamReader marksReader;
+
+            //string line = "";
+            //List<int> finalMark = new List<int>();
+            ////SET the filter for the dialog control
+            //openFileDialog1.Filter = FILTER;
+            ////IF user selects a file, THEN
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    //OPEN input file
+            //    marksReader = File.OpenText(openFileDialog1.FileName);
+            //    //WHILE not end of file
+                //int i = 0;
+                //while(!marksReader.EndOfStream)
+                //{
+                //    try
+                //    {
+                //        //READ a whole csv line from the file
+                //        line = marksReader.ReadLine();
+                //        //SPLIT the values from the line using an array
+                //        idArray = line.Split(',');
+                //        marksArray = line.Split(',');
+                //        //EXTRACT values into separate variable
+                //        finalMark.Add(int.Parse(marksArray[1]));
+
+
+                //        //DRAW the values into a bar graph
+                //        Graphics canvas = pictureBoxGraph.CreateGraphics();
+                //        DrawABar(canvas, x, y, (int)finalMark[i], Color.Red);
+                //        i++;
+                //    }
+                //    catch
+                //    {
+
+                //    }
+                //}
+                //marksReader.Close();
+            }
+
+
+        //Graphics canvas = pictureBoxGraph.CreateGraphics();
+        //mark = int.Parse(marksArray[1]);
+        //y = pictureBoxGraph.Height;
+        //DrawABar(canvas, x, y, mark, Color.Blue);
+        //x += BAR_WIDTH;
+
+
+        private string CalcuLetterGrade(int mark)
+        {
+            //CHECK marks and retrun a letter grade
+            if (mark >= 80)
+            {
+                //Return a A Grade
+                return "A";
+            }
+            else if (mark >= 65)
+            {
+                //Return a B Grade
+                return "B";
+            }
+            else if (mark >= 50)
+            {
+                //Return a C Grade
+                return "C";
+            }
+            else if (mark >= 35)
+            {
+                //Return a D Grade
+                return "D";
+            }
+            else
+            {
+                //Return a E Grade
+                return "E";
+            }
+        }
 
         /// <summary>
         /// This method will write to a textfile the id, mark and letter grade of each student
@@ -172,6 +240,9 @@ namespace student_grades
             string filename = "Report.txt";
             //CREATE text file
             writer = File.CreateText(filename);
+
+            //for everthing in the marksArray 
+
             //WRITE the header line
             writer.WriteLine("This is a test");
             writer.Close();
